@@ -1,244 +1,282 @@
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espaço Vanessa Braga - Consultoria Rivan</title>
+    <title>Espaço Vanessa Braga - Guia de Prescrição</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Prata&display=swap');
         
-        :root {
-            --gold: #c5a059;
-            --dark: #1a1a1a;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fcfcfc;
-            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fcfaf7;
+            color: #2d2d2d;
         }
 
-        .serif { font-family: 'Playfair Display', serif; }
-        
-        .gold-gradient {
-            background: linear-gradient(135deg, #c5a059 0%, #edd3a1 100%);
+        .font-prata { font-family: 'Prata', serif; }
+
+        .gold-border {
+            border-image: linear-gradient(to right, #c5a059, #edd3a1) 1;
         }
 
-        .card-shadow {
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        .bg-luxury {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #c5a059 0%, #d4af37 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
         }
 
         @media print {
             .no-print { display: none !important; }
             body { background: white; padding: 0; }
-            .print-container { box-shadow: none; border: none; width: 100%; max-width: 100%; margin: 0; }
+            .print-area { box-shadow: none !important; border: none !important; width: 100% !important; max-width: 100% !important; margin: 0 !important; }
+        }
+
+        .checkbox-custom:checked + label {
+            background-color: #fef3c7;
+            border-color: #d4af37;
         }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-4 md:p-8">
     <div class="max-w-4xl mx-auto">
-        
-        <!-- Header -->
-        <header class="text-center mb-12">
-            <h1 class="serif text-4xl font-bold tracking-tight text-gray-900 mb-2">Espaço Vanessa Braga</h1>
-            <p class="uppercase tracking-[0.3em] text-xs text-amber-700 font-semibold">Especialista em Saúde Capilar & Rivan Cosméticos</p>
-            <div class="h-1 w-24 gold-gradient mx-auto mt-4 rounded-full"></div>
+        <!-- Logo e Header -->
+        <header class="text-center mb-10">
+            <h1 class="font-prata text-4xl md:text-5xl text-gray-900 mb-2">Espaço Vanessa Braga</h1>
+            <p class="tracking-[0.4em] text-[10px] uppercase font-bold text-amber-700">Terapia Capilar & Rivan Cosméticos</p>
+            <div class="h-[2px] w-32 bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mt-4"></div>
         </header>
 
-        <!-- Formulário de Anamnese -->
-        <section class="no-print bg-white rounded-2xl p-8 mb-10 card-shadow border border-gray-100">
-            <div class="flex items-center gap-3 mb-8">
-                <div class="p-2 bg-amber-50 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                </div>
-                <h2 class="text-xl font-bold italic serif">Anamnese Digital</h2>
+        <!-- Formulário de Anamnese (App) -->
+        <div class="no-print bg-white rounded-3xl shadow-xl overflow-hidden mb-10 border border-amber-100">
+            <div class="bg-luxury p-6 text-white">
+                <h2 class="font-prata text-2xl">Diagnóstico de Anamnese</h2>
+                <p class="text-gray-400 text-xs mt-1 uppercase tracking-widest">Selecione as condições identificadas</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Identificação -->
-                <div class="col-span-full md:col-span-1">
-                    <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Nome da Cliente</label>
-                    <input type="text" id="nomeCliente" placeholder="Ex: Ana Paula" class="w-full bg-gray-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-amber-500 outline-none transition-all">
+            
+            <div class="p-8 space-y-8">
+                <!-- Nome -->
+                <div class="group">
+                    <label class="block text-[10px] font-bold uppercase text-gray-400 mb-2 tracking-widest">Nome da Cliente</label>
+                    <input type="text" id="nome" placeholder="Digite o nome completo" class="w-full border-b-2 border-gray-100 focus:border-amber-500 outline-none pb-2 text-lg transition-colors bg-transparent">
                 </div>
 
-                <!-- Tipo de Cabelo -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Disfunção Capilar -->
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-gray-400 mb-3 tracking-widest">Disfunção Capilar (Sintomas)</label>
+                        <select id="disfuncao" class="w-full bg-gray-50 rounded-xl p-4 outline-none border border-transparent focus:border-amber-300">
+                            <option value="">Selecione a principal queixa...</option>
+                            <option value="queda">Cabelo Caindo (Queda)</option>
+                            <option value="fraco">Cabelo Fraco / Sem Vida</option>
+                            <option value="fino">Cabelo Fino / Ralo</option>
+                            <option value="quebradico">Cabelo Quebradico / Elástico</option>
+                            <option value="caspa">Caspa / Seborreia</option>
+                            <option value="ressecado">Ressecamento / Porosidade</option>
+                        </select>
+                    </div>
+
+                    <!-- Condição de Saúde -->
+                    <div>
+                        <label class="block text-[10px] font-bold uppercase text-gray-400 mb-3 tracking-widest">Situação de Saúde</label>
+                        <select id="saude" class="w-full bg-gray-50 rounded-xl p-4 outline-none border border-transparent focus:border-amber-300">
+                            <option value="padrao">Padrão / Nenhuma específica</option>
+                            <option value="hormonal">Dificuldades Hormonais (Menopausa/Tireoide)</option>
+                            <option value="diabetico">Paciente Diabético</option>
+                            <option value="gravida">Gestante / Lactante</option>
+                            <option value="estresse">Pós-Operatório / Estresse</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Procedimentos já realizados -->
                 <div>
-                    <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Perfil do Fio</label>
-                    <select id="tipoCabelo" class="w-full bg-gray-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-amber-500 outline-none">
-                        <option value="">Selecione...</option>
-                        <option value="fino">Cabelos Finos e Fragilizados</option>
-                        <option value="cacheado">Cachos e Ondulados</option>
-                        <option value="resistente">Espessos e Resistentes</option>
-                        <option value="quimica">Com Química (Loiros/Alisados)</option>
-                    </select>
+                    <label class="block text-[10px] font-bold uppercase text-gray-400 mb-3 tracking-widest">Tipo de Cabelo / Estrutura</label>
+                    <div class="flex flex-wrap gap-3">
+                        <input type="radio" name="tipo" id="t1" value="fino" class="hidden">
+                        <label for="t1" class="cursor-pointer px-4 py-2 border rounded-full text-xs font-semibold hover:border-amber-500 transition-colors">Fino</label>
+                        
+                        <input type="radio" name="tipo" id="t2" value="medio" class="hidden" checked>
+                        <label for="t2" class="cursor-pointer px-4 py-2 border rounded-full text-xs font-semibold hover:border-amber-500 transition-colors">Médio</label>
+                        
+                        <input type="radio" name="tipo" id="t3" value="grosso" class="hidden">
+                        <label for="t3" class="cursor-pointer px-4 py-2 border rounded-full text-xs font-semibold hover:border-amber-500 transition-colors">Grosso/Resistente</label>
+                    </div>
                 </div>
 
-                <!-- Deficiência Principal -->
-                <div>
-                    <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Disfunção Capilar</label>
-                    <select id="deficiencia" class="w-full bg-gray-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-amber-500 outline-none">
-                        <option value="">Selecione...</option>
-                        <option value="crono">Necessita de Cronograma (H/N/R)</option>
-                        <option value="emborrachado">Emborrachado / SOS Urgente</option>
-                        <option value="porosidade">Alta Porosidade (Frizz Extremo)</option>
-                        <option value="volume">Excesso de Volume / Indisciplina</option>
-                    </select>
-                </div>
-
-                <!-- Condição de Saúde -->
-                <div>
-                    <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Condição Especial de Saúde</label>
-                    <select id="condicao" class="w-full bg-gray-50 border-none rounded-xl p-4 focus:ring-2 focus:ring-amber-500 outline-none">
-                        <option value="normal">Nenhuma (Padrão)</option>
-                        <option value="gravida">Gestante ou Lactante</option>
-                        <option value="diabetico">Diabético(a)</option>
-                        <option value="hormonal">Hormonal (Menopausa/Tireoide)</option>
-                    </select>
-                </div>
-            </div>
-
-            <button onclick="processar()" class="mt-10 w-full gold-gradient text-white font-bold py-5 rounded-2xl shadow-lg shadow-amber-200 hover:scale-[1.01] active:scale-[0.98] transition-all uppercase tracking-widest text-sm">
-                Gerar Diagnóstico Personalizado
-            </button>
-        </section>
-
-        <!-- Prescrição Resultante -->
-        <div id="resultado" class="hidden bg-white rounded-3xl p-10 card-shadow border border-gray-100 print-container relative">
-            <div class="absolute top-8 right-8 no-print">
-                <button onclick="window.print()" class="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 10-4 0v4a2 2 0 002 2zm-10 0h-2a2 2 0 01-2-2v-4a2 2 0 114 0v4a2 2 0 01-2 2zM9 17h6m-2-4h.01M9 16h.01" />
-                        <path d="M7 18H17V21H7V18Z" />
-                    </svg>
+                <button onclick="gerarPrescricao()" class="w-full btn-gold text-white font-bold py-5 rounded-2xl uppercase tracking-widest text-sm shadow-lg">
+                    Gerar Prescrição Inteligente
                 </button>
             </div>
+        </div>
 
-            <div class="mb-10">
-                <p class="text-xs font-bold text-amber-600 uppercase mb-1">Resultado da Consultoria</p>
-                <h3 class="serif text-3xl" id="resNome">Prescrição Capilar</h3>
-                <p class="text-sm text-gray-400" id="resData"></p>
-            </div>
+        <!-- Área do Documento Gerado -->
+        <div id="documento" class="hidden bg-white p-10 md:p-16 shadow-2xl rounded-sm print-area border-t-8 border-amber-600 relative overflow-hidden">
+            <!-- Marca D'água ou Detalhe -->
+            <div class="absolute top-[-50px] right-[-50px] w-64 h-64 bg-amber-50 rounded-full -z-0 opacity-50"></div>
 
-            <div class="space-y-10">
-                <!-- Tratamento de Choque -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-widest text-gray-800 border-b pb-2 mb-4">1. Tratamento Home Care (Rivan Cosméticos)</h4>
-                    <div id="listaHomeCare" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Itens dinâmicos -->
+            <div class="relative z-10">
+                <div class="flex justify-between items-start mb-12">
+                    <div>
+                        <h3 class="font-prata text-3xl text-gray-800">Prescrição de Tratamento</h3>
+                        <p class="text-amber-600 font-bold uppercase tracking-tighter text-xs" id="docCliente"></p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-gray-400 uppercase">Emitido por Vanessa Braga</p>
+                        <p class="text-xs font-medium" id="docData"></p>
                     </div>
                 </div>
 
-                <!-- Procedimento no Espaço -->
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-widest text-gray-800 border-b pb-2 mb-4">2. Protocolo de Cabine (Espaço Vanessa Braga)</h4>
-                    <div id="protocoloProfissional" class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                        <!-- Itens dinâmicos -->
+                <!-- Conteúdo -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Home Care -->
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-2 border-b border-gray-100 pb-2">
+                            <span class="w-2 h-2 bg-amber-500 rounded-full"></span>
+                            <h4 class="font-bold text-xs uppercase tracking-widest">Rivan Cosméticos (Home Care)</h4>
+                        </div>
+                        <ul id="homecareList" class="space-y-3 text-sm text-gray-600">
+                            <!-- Injetado via JS -->
+                        </ul>
+                    </div>
+
+                    <!-- Cabine -->
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-2 border-b border-gray-100 pb-2">
+                            <span class="w-2 h-2 bg-black rounded-full"></span>
+                            <h4 class="font-bold text-xs uppercase tracking-widest">Espaço Vanessa Braga (Protocolo)</h4>
+                        </div>
+                        <div id="protocoloArea" class="text-sm text-gray-600 italic leading-relaxed">
+                            <!-- Injetado via JS -->
+                        </div>
                     </div>
                 </div>
 
-                <!-- Observações Especiais -->
-                <div id="blocoSaude" class="hidden p-6 rounded-2xl bg-amber-50 border border-amber-100">
-                    <h4 class="text-xs font-bold uppercase text-amber-800 mb-2">Cuidados Especiais & Saúde</h4>
-                    <p id="textoSaude" class="text-sm text-amber-900 leading-relaxed"></p>
+                <!-- Observação Saúde -->
+                <div id="saudeArea" class="mt-12 p-6 bg-red-50 rounded-xl border-l-4 border-red-300 hidden">
+                    <h5 class="text-[10px] font-bold text-red-800 uppercase mb-2 tracking-widest italic">Atenção Especial</h5>
+                    <p id="saudeTexto" class="text-xs text-red-700 font-medium"></p>
                 </div>
-            </div>
 
-            <div class="mt-16 text-center border-t pt-8">
-                <p class="serif italic text-gray-500 mb-4">"Cuidar do seu cabelo é um ato de amor próprio."</p>
-                <div class="flex justify-center gap-6">
-                    <div class="text-[10px] uppercase font-bold text-gray-400">@espacovanessabraga</div>
-                    <div class="text-[10px] uppercase font-bold text-gray-400">@rivancosmeticos</div>
+                <!-- Assinatura e Rodapé -->
+                <div class="mt-20 pt-10 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="text-center md:text-left">
+                        <p class="font-prata text-xl">Vanessa Braga</p>
+                        <p class="text-[10px] uppercase text-gray-400">Especialista em Saúde Capilar</p>
+                    </div>
+                    <div class="no-print">
+                        <button onclick="window.print()" class="px-6 py-2 border border-gray-200 rounded-full text-xs font-bold hover:bg-gray-50 transition-colors uppercase">Salvar como PDF</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function processar() {
-            const nome = document.getElementById('nomeCliente').value;
-            const tipo = document.getElementById('tipoCabelo').value;
-            const def = document.getElementById('deficiencia').value;
-            const saude = document.getElementById('condicao').value;
+        function gerarPrescricao() {
+            const nome = document.getElementById('nome').value || "Cliente";
+            const disfuncao = document.getElementById('disfuncao').value;
+            const saude = document.getElementById('saude').value;
+            const tipo = document.querySelector('input[name="tipo"]:checked').value;
 
-            if(!tipo || !def) return alert("Preencha os campos principais!");
+            if(!disfuncao) return alert("Por favor, selecione a disfunção capilar observada.");
 
             let homecare = [];
             let protocolo = "";
             let obsSaude = "";
 
-            // Lógica de Produtos Rivan com base na Anamnese
-            if(def === 'crono') {
-                homecare = [
-                    "Máscara EVOLUTION 3 em 1 (1kg) - Cronograma Completo",
-                    "Keratin Glow (Queratina Líquida Protetora Térmica)",
-                    "Reparador de Pontas ArganOil"
-                ];
-                protocolo = "<strong>Ciclo de Regeneração:</strong> Higienização com Deep Clean seguida de Terapia de Nutrição com Manteiga de Cupuaçu sob vapor de ozônio.";
-            } else if(def === 'emborrachado') {
-                homecare = [
-                    "Máscara SOS MASK 300g (Reconstrução com Biotina)",
-                    "Máscara Rosa Mosqueta (Cauterização Instantânea)",
-                    "Keratin Glow (Uso obrigatório antes do secador)"
-                ];
-                protocolo = "<strong>Cauterização a Frio Vanessa Braga:</strong> Tratamento intensivo com Rosa Mosqueta e Keratin Glow selado com chapinha em baixa temperatura.";
-            } else if(def === 'porosidade') {
-                homecare = [
-                    "Máscara Manteiga de Cupuaçu 300g",
-                    "Sérum Reparador Rosa Mosqueta Oil",
-                    "Spray de Brilho 200ml"
-                ];
-                protocolo = "<strong>Blindagem de Cutículas:</strong> Infusão de ArganOil com selagem térmica para retenção de água na fibra.";
-            } else if(def === 'volume') {
-                homecare = [
-                    "Ativa Cachos 2 em 1 (Se for cacheada)",
-                    "Spray de Brilho (Redução de Frizz)",
-                    "Reparador ArganOil"
-                ];
-                protocolo = "<strong>Alinhamento Evolution:</strong> Aplicação de Botox ou Progressiva Evolution (0% Formol) para disciplina e redução drástica de volume.";
+            // Lógica de Produtos e Protocolos
+            switch(disfuncao) {
+                case 'queda':
+                    homecare = [
+                        "<b>Máscara SOS MASK:</b> Focada em reconstrução com Jaborandi e Biotina para fortalecer o folículo.",
+                        "<b>Sérum Reparador Rosa Mosqueta Oil:</b> Regenerador potente.",
+                        "<b>Argila Capilar:</b> Detox e purificação do couro cabeludo."
+                    ];
+                    protocolo = "<b>Terapia de Fortalecimento:</b> Detox com Argila Capilar + Massagem Estimulante e aplicação de SOS MASK sob vapor de ozônio.";
+                    break;
+                case 'fraco':
+                    homecare = [
+                        "<b>Máscara EVOLUTION 3 em 1:</b> Cronograma completo com Rícino e Babosa.",
+                        "<b>Reparador de Pontas ArganOil:</b> Nutrição intensa contra o aspecto poroso.",
+                        "<b>Spray de Brilho:</b> Proteção e vitalidade diária."
+                    ];
+                    protocolo = "<b>Cronograma de Choque:</b> Tratamento Evolution para repor massa e nutrientes simultaneamente.";
+                    break;
+                case 'fino':
+                    homecare = [
+                        "<b>Máscara Manteiga de Cupuaçu:</b> Encorpamento da fibra e regeneração.",
+                        "<b>Keratin Glow:</b> Queratina líquida para dar estrutura ao fio fino.",
+                        "<b>Sérum Rosa Mosqueta:</b> Proteção sem pesar os fios."
+                    ];
+                    protocolo = "<b>Redensificação Evolution:</b> Alinhamento com Progressiva Evolution (0% Formol) para selar e encorpar fios finos.";
+                    break;
+                case 'quebradico':
+                    homecare = [
+                        "<b>Máscara SOS MASK:</b> Reposição de aminoácidos urgente.",
+                        "<b>Máscara Rosa Mosqueta:</b> Cauterização Instantânea.",
+                        "<b>Keratin Glow:</b> Blindagem térmica obrigatória."
+                    ];
+                    protocolo = "<b>Cauterização de Alto Desempenho:</b> Tratamento Rosa Mosqueta + Selagem de cutículas térmica para interromper a quebra imediata.";
+                    break;
+                case 'caspa':
+                    homecare = [
+                        "<b>Argila Capilar:</b> Controle da oleosidade e fungos.",
+                        "<b>Shampoo Deep Clean:</b> Limpeza profunda quinzenal.",
+                        "<b>Máscara Evolution:</b> Hidratação de pontas sem tocar a raiz."
+                    ];
+                    protocolo = "<b>Peeling Capilar Profissional:</b> Argiloterapia combinada com Deep Clean e alta frequência para assepsia do couro.";
+                    break;
+                case 'ressecado':
+                    homecare = [
+                        "<b>Máscara Manteiga de Cupuaçu:</b> Hidratação Profunda.",
+                        "<b>Reparador ArganOil:</b> Selante lipídico.",
+                        "<b>Ativa Cachos 2 em 1:</b> (Se cacheado) para manter a umidade."
+                    ];
+                    protocolo = "<b>Nutrição Real:</b> Protocolo Cupuaçu com foco em devolução de brilho e maciez extrema.";
+                    break;
             }
 
-            // Lógica de Alinhamento e Saúde
+            // Lógica de Alinhamento (Casos Especiais)
             if(saude === 'gravida') {
-                obsSaude = "Para gestantes, realizamos apenas o <strong>Botox Magnífica Açaí</strong>. Ele é 100% sem química agressiva, focado no fortalecimento e nutrição da fibra, sendo totalmente seguro para você e o bebê.";
-                homecare.push("Botox Magnífica Açaí (Manutenção Nutritiva)");
+                obsSaude = "<b>Protocolo Gestante:</b> Por segurança, indicamos apenas o <b>Botox Magnífica Açaí</b>. Ele é livre de químicas agressivas, utiliza ativos naturais de fortalecimento e nutrição, garantindo beleza sem riscos.";
+                homecare.push("<b>Botox Magnífica Açaí:</b> Manutenção segura pós-salão.");
             } else if(saude === 'diabetico') {
-                obsSaude = "Diabéticos possuem sensibilidade maior no couro cabeludo. Evitamos o uso do Deep Clean puro na raiz e priorizamos a Máscara de Cupuaçu para regeneração tecidual.";
+                obsSaude = "<b>Cuidado Diabético:</b> O couro cabeludo pode ter cicatrização mais lenta. Evitamos produtos abrasivos e focamos na <b>Manteiga de Cupuaçu</b> para regeneração suave.";
             } else if(saude === 'hormonal') {
-                obsSaude = "Alterações de tireoide ou menopausa podem causar queda. Indicamos a <strong>SOS MASK</strong> pelo ativo de Biotina e Jaborandi para estimular o fortalecimento folicular.";
+                obsSaude = "<b>Equilíbrio Hormonal:</b> Alterações hormonais costumam causar afinamento. O uso da <b>SOS MASK (Biotina)</b> é crucial para manter a densidade capilar.";
+            } else if(saude === 'estresse') {
+                obsSaude = "<b>Eflúvio por Estresse:</b> Foco em relaxamento e aporte de vitaminas. A <b>Rosa Mosqueta</b> ajudará na regeneração rápida da fibra degradada.";
             }
 
-            // Ajustes por Tipo de Cabelo
-            if(tipo === 'fino') {
-                protocolo += " <br><em>Obs: Uso da linha Evolution (Ricino e Babosa) para encorpamento do fio sem pesar.</em>";
-            }
-
-            // Exibição
-            document.getElementById('resNome').innerText = nome ? `Para: ${nome}` : "Diagnóstico Personalizado";
-            document.getElementById('resData').innerText = `Realizado em ${new Date().toLocaleDateString()}`;
+            // Inserção no Documento
+            document.getElementById('docCliente').innerText = `Paciente: ${nome}`;
+            document.getElementById('docData').innerText = new Date().toLocaleDateString('pt-BR');
             
-            const listContainer = document.getElementById('listaHomeCare');
-            listContainer.innerHTML = homecare.map(p => `
-                <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-                    <div class="mt-1"><svg class="h-4 w-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg></div>
-                    <span class="text-sm font-medium text-gray-700">${p}</span>
-                </div>
-            `).join('');
-
-            document.getElementById('protocoloProfissional').innerHTML = `<p class="text-gray-700 leading-relaxed">${protocolo}</p>`;
+            const list = document.getElementById('homecareList');
+            list.innerHTML = homecare.map(item => `<li>• ${item}</li>`).join('');
+            
+            document.getElementById('protocoloArea').innerHTML = protocolo;
 
             if(obsSaude) {
-                document.getElementById('blocoSaude').classList.remove('hidden');
-                document.getElementById('textoSaude').innerHTML = obsSaude;
+                document.getElementById('saudeArea').classList.remove('hidden');
+                document.getElementById('saudeTexto').innerHTML = obsSaude;
             } else {
-                document.getElementById('blocoSaude').classList.add('hidden');
+                document.getElementById('saudeArea').classList.add('hidden');
             }
 
-            document.getElementById('resultado').classList.remove('hidden');
-            document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('documento').classList.remove('hidden');
+            document.getElementById('documento').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
-</html>
+                     </html>
