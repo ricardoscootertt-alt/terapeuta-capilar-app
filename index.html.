@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanessa Braga - Prescrição Inteligente</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fdfbfb; }
+        .card-gold { border-top: 4px solid #d4af37; }
+        @media print { .no-print { display: none; } .print-only { display: block; } body { background: white; } }
+        /* Estilo Suave para Mobile */
+        select, input { font-size: 16px !important; } 
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-2xl mx-auto">
+        <header class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800 uppercase tracking-widest">Espaço Vanessa Braga</h1>
+            <p class="text-yellow-700 font-medium text-xs">Consultoria Capilar & Rivan Cosméticos</p>
+            <div class="h-1 w-16 bg-[#d4af37] mx-auto mt-2"></div>
+        </header>
+
+        <div class="bg-white rounded-2xl shadow-sm p-6 mb-6 card-gold no-print border border-gray-100">
+            <h2 class="text-lg font-bold mb-5 flex items-center gap-2 text-gray-700">
+                📋 Novo Diagnóstico
+            </h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Nome da Cliente</label>
+                    <input type="text" id="nomeCliente" placeholder="Nome Completo" class="w-full border-gray-200 rounded-xl p-3 border focus:ring-2 focus:ring-yellow-500 outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Tipo de Cabelo</label>
+                        <select id="tipoCabelo" class="w-full border-gray-200 rounded-xl p-3 border bg-white">
+                            <option value="">Selecione...</option>
+                            <option value="Liso">Liso (Natural ou com Progressiva)</option>
+                            <option value="Ondulado">Ondulado / Cacheado</option>
+                            <option value="Crespo">Crespo / Afropatty</option>
+                            <option value="Descolorido">Loiro / Descolorido</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Deficiência Principal</label>
+                        <select id="deficiencia" class="w-full border-gray-200 rounded-xl p-3 border bg-white">
+                            <option value="">Selecione...</option>
+                            <option value="Quebra e Elasticidade">Quebra e Elasticidade</option>
+                            <option value="Ressecamento Extremo">Ressecamento Extremo (Porosidade)</option>
+                            <option value="Queda Capilar">Queda Capilar (Raiz)</option>
+                            <option value="Opacidade">Opacidade (Falta de Brilho)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Saúde / Condição</label>
+                        <select id="condicao" class="w-full border-gray-200 rounded-xl p-3 border bg-white">
+                            <option value="nenhuma">Nenhuma Especial</option>
+                            <option value="Hormonal">Alterações Hormonais</option>
+                            <option value="Diabético">Diabético</option>
+                            <option value="Gestante">Gestante / Lactante</option>
+                            <option value="Estresse">Eflúvio (Estresse)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="gerarPrescricao()" class="w-full bg-black text-white py-4 rounded-xl font-bold mt-4 shadow-lg active:scale-95 transition">
+                    GERAR PRESCRIÇÃO
+                </button>
+            </div>
+        </div>
+
+        <div id="prescricaoContainer" class="hidden bg-white rounded-2xl shadow-xl p-6 border border-gray-100 mb-20">
+            <div class="flex justify-between items-start mb-6 border-b pb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">PRESCRIÇÃO</h3>
+                    <p class="text-gray-500 text-sm" id="printNome"></p>
+                </div>
+                <span class="text-[10px] text-gray-400 font-mono" id="dataAtual"></span>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <h4 class="text-xs font-bold text-yellow-600 uppercase tracking-widest mb-3">🛍️ Home Care Rivan</h4>
+                    <ul id="listaProdutos" class="space-y-2 text-sm text-gray-700"></ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-gray-800 uppercase tracking-widest mb-3">💇 No Salão</h4>
+                    <div id="procedimentoIndicado" class="text-sm text-gray-600 p-3 bg-gray-50 rounded-lg border-l-2 border-black"></div>
+                </div>
+
+                <div id="alertaSaude" class="hidden p-4 bg-red-50 rounded-xl border-l-2 border-red-500 text-xs text-red-700 italic"></div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-2 gap-3 no-print">
+                <button onclick="enviarWhatsApp()" class="bg-green-500 text-white p-3 rounded-lg font-bold text-sm flex items-center justify-center gap-2">
+                    WhatsApp
+                </button>
+                <button onclick="window.print()" class="bg-blue-600 text-white p-3 rounded-lg font-bold text-sm">
+                    PDF / Imprimir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let dadosAtuais = {};
+
+        function gerarPrescricao() {
+            const tipo = document.getElementById('tipoCabelo').value;
+            const deficiencia = document.getElementById('deficiencia').value;
+            const condicao = document.getElementById('condicao').value;
+            const nome = document.getElementById('nomeCliente').value || "Cliente";
+
+            if (!tipo || !deficiencia) { alert("Preencha os campos principais!"); return; }
+
+            let produtos = [];
+            let procedimento = "";
+            let saude = "";
+
+            if(deficiencia === 'Quebra e Elasticidade') {
+                produtos = ["Shampoo Rivan Reconstruction", "Máscara de Aminoácidos Rivan", "Leave-in Proteção Térmica"];
+                procedimento = "Protocolo de Rígidez e Força: Terapia de reconstrução com laser frio.";
+            } else if(deficiencia === 'Ressecamento Extremo') {
+                produtos = ["Shampoo Rivan Nutritive", "Máscara Oil Therapy Rivan", "Sérum de Finalização"];
+                procedimento = "Nutrição Lipídica: Umectação a quente com ozonioterapia.";
+            } else if(deficiencia === 'Queda Capilar') {
+                produtos = ["Shampoo Rivan Detox", "Tônico de Crescimento Rivan", "Máscara Equilíbrio"];
+                procedimento = "Terapia Capilar Detox: Argiloterapia + Microagulhamento.";
+            } else {
+                produtos = ["Linha Rivan Glow (Brilho)", "Vinagre de Maçã Rivan", "Finalizador de Brilho"];
+                procedimento = "Banho de Verniz Orgânico: Selagem de cutículas.";
+            }
+
+            if(condicao !== 'nenhuma') saude = "Atenção: Condição " + condicao + " detectada. Foco em produtos pH neutro e evitar tração.";
+
+            dadosAtuais = { nome, tipo, deficiencia, produtos, procedimento, saude };
+
+            document.getElementById('printNome').innerText = "Cliente: " + nome;
+            document.getElementById('dataAtual').innerText = new Date().toLocaleDateString();
+            
+            const lista = document.getElementById('listaProdutos');
+            lista.innerHTML = produtos.map(p => `<li>✅ ${p}</li>`).join('');
+            document.getElementById('procedimentoIndicado').innerText = procedimento;
+
+            const alerta = document.getElementById('alertaSaude');
+            if(saude) { alerta.innerText = saude; alerta.classList.remove('hidden'); }
+            else { alerta.classList.add('hidden'); }
+
+            document.getElementById('prescricaoContainer').classList.remove('hidden');
+            document.getElementById('prescricaoContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function enviarWhatsApp() {
+            const msg = `*ESPAÇO VANESSA BRAGA*\n*Prescrição de: ${dadosAtuais.nome}*\n\n*Home Care Rivan:*\n${dadosAtuais.produtos.map(p => "- " + p).join('\n')}\n\n*Tratamento no Salão:*\n${dadosAtuais.procedimento}\n\n${dadosAtuais.saude ? "*Nota:* " + dadosAtuais.saude : ""}`;
+            const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+  </html>
